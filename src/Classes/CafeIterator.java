@@ -52,6 +52,25 @@ public class CafeIterator {
         }
     }
     
+    public int buscaPKPelaDescricao(String descricao){
+         MySQLcon sqlcon = new MySQLcon();
+        int pk = 0;
+        try{
+            String sql = "SELECT pkcafe FROM cafe WHERE Descricao = ?";
+            PreparedStatement prepstatement = sqlcon.preparaSQL(sql);
+            prepstatement.setString(1, descricao);
+            ResultSet result = sqlcon.ler();
+            while (result.next()){
+                pk = result.getInt("pkcafe");
+            }
+        } catch(Exception e){
+            
+        } finally{
+            sqlcon.close();
+        }
+        return pk;       
+    }
+    
     public int buscaPKcafe(Cafe cafe){
         MySQLcon sqlcon = new MySQLcon();
         int pk = 0;

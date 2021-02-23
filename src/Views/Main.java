@@ -33,6 +33,7 @@ public class Main extends javax.swing.JFrame {
         MIcafe = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MIConsultaAluno = new javax.swing.JMenuItem();
+        MIConsultaSala = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,6 +76,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu2.add(MIConsultaAluno);
+
+        MIConsultaSala.setText("Café");
+        MIConsultaSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIConsultaSalaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MIConsultaSala);
 
         jMenuBar1.add(jMenu2);
 
@@ -121,6 +130,12 @@ public class Main extends javax.swing.JFrame {
         cAluno.setVisible(true);
     }//GEN-LAST:event_MIConsultaAlunoActionPerformed
 
+    private void MIConsultaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIConsultaSalaActionPerformed
+        // TODO add your handling code here:
+        ConsultaCafe ccafe = new ConsultaCafe();
+        ccafe.setVisible(true);
+    }//GEN-LAST:event_MIConsultaSalaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,6 +173,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MIConsultaAluno;
+    private javax.swing.JMenuItem MIConsultaSala;
     private javax.swing.JMenuItem MISalas;
     private javax.swing.JMenuItem MIalunos;
     private javax.swing.JMenuItem MIcafe;
