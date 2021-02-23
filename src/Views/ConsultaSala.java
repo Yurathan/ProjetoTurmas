@@ -5,9 +5,14 @@
  */
 package Views;
 
+import Classes.Etapa;
+import Classes.EtapaIterator;
+import Classes.Etapa_;
+import Classes.SalaIterator;
 import DBConnect.MySQLcon;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,6 +41,9 @@ public class ConsultaSala extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         CBsala = new javax.swing.JComboBox<>();
         CBFase = new javax.swing.JComboBox<>();
+        BTconsulta = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTresultado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consulta Sala");
@@ -60,6 +68,41 @@ public class ConsultaSala extends javax.swing.JFrame {
 
         CBFase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        BTconsulta.setText("Consultar");
+        BTconsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTconsultaActionPerformed(evt);
+            }
+        });
+
+        JTresultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Nome Completo", "Fase"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(JTresultado);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,14 +113,22 @@ public class ConsultaSala extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CBsala, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CBFase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CBsala, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CBFase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(305, 305, 305)
+                .addComponent(BTconsulta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +141,11 @@ public class ConsultaSala extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(CBsala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CBFase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(529, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BTconsulta)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -129,6 +184,52 @@ public class ConsultaSala extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void BTconsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTconsultaActionPerformed
+        EtapaIterator etapaiterator = new EtapaIterator();
+        SalaIterator salaiterator = new SalaIterator();
+        
+        int pkSala = salaiterator.BuscaPkSalaPela(CBsala.getSelectedItem().toString());
+        int pkfase = 0;
+        if  (!CBFase.getSelectedItem().toString().isEmpty()){
+            pkfase = etapaiterator.retornaPkEtapaPela(CBFase.getSelectedItem().toString());
+        }
+        String SQL = "SELECT Alunos.pkAluno codigo, Alunos.NomeCompleto nome,Alunos_has_Etapa.fkEtapa pkEtapa FROM Alunos, Alunos_has_Etapa where Alunos.pkAluno = Alunos_has_etapa.fkaluno"
+                    +" AND fkSala = ? ";
+        if  (!CBFase.getSelectedItem().toString().isEmpty()){
+            SQL = SQL + " AND fkEtapa = ?";
+        }
+        
+        DefaultTableModel model;
+        model = (DefaultTableModel)JTresultado.getModel();
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        int codigo = 0;
+        String nome = "";
+        String fase = "";
+        Etapa etapa = new Etapa();
+        MySQLcon con = new MySQLcon();
+        try{
+            PreparedStatement prepstatement = con.preparaSQL(SQL);
+            prepstatement.setInt(1, pkSala);
+            if  (!CBFase.getSelectedItem().toString().isEmpty()){
+                prepstatement.setInt(2, pkfase);
+            }
+            ResultSet R = con.ler();
+            while(R.next()){
+                codigo = R.getInt("codigo");
+                nome = R.getString("nome");
+                etapa = etapaiterator.buscaEtapaPelaPk(R.getInt("pkEtapa"));
+                fase = etapa.getDescricao();
+                model.addRow(new Object[]{codigo, nome, fase});
+            }
+        }catch(Exception e){
+            
+        }finally{
+            
+        }
+    }//GEN-LAST:event_BTconsultaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -165,10 +266,13 @@ public class ConsultaSala extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTconsulta;
     private javax.swing.JComboBox<String> CBFase;
     private javax.swing.JComboBox<String> CBsala;
+    private javax.swing.JTable JTresultado;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

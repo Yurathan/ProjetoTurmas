@@ -35,4 +35,24 @@ public class EtapaIterator {
         }
         return etapa;
     }        
+    
+    public int retornaPkEtapaPela(String Descricao){
+        MySQLcon sqlcon = new MySQLcon();
+        int pk = 0;
+        try{
+            String sql = "select pkEtapa from etapa where Descricao LIKE ?";
+            PreparedStatement prepstatement = sqlcon.preparaSQL(sql);
+            prepstatement.setString(1, Descricao);
+            ResultSet result = sqlcon.ler();
+            while (result.next()){
+                pk = result.getInt("pkEtapa");
+            }
+            
+        } catch(Exception e){
+
+        } finally{
+            sqlcon.close();
+        }
+        return pk;        
+    }
 }

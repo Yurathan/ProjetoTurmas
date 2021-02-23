@@ -55,7 +55,26 @@ public class SalaIterator {
         return retorno == 2;
     }
     
-        public int buscaPKsala(Salas sala){
+    public int BuscaPkSalaPela(String Descricao){
+        MySQLcon sqlcon = new MySQLcon();
+        int pk = 0;
+        try{
+            String sql = "SELECT pkSala FROM Salas WHERE Descricao LIKE ?";
+            PreparedStatement prepstatement = sqlcon.preparaSQL(sql);
+            prepstatement.setString(1, Descricao);
+            ResultSet result = sqlcon.ler();
+            while (result.next()){
+                pk = result.getInt("pksala");
+            }
+        } catch(Exception e){
+            
+        } finally{
+            sqlcon.close();
+        }
+        return pk;        
+    }
+    
+    public int buscaPKsala(Salas sala){
         MySQLcon sqlcon = new MySQLcon();
         int pk = 0;
         try{
@@ -92,7 +111,7 @@ public class SalaIterator {
         }
     }
     
-        public Salas buscaSalaPelaPk(int pk){
+    public Salas buscaSalaPelaPk(int pk){
         MySQLcon sqlcon = new MySQLcon();
         Salas sala = new Salas();
         try{
