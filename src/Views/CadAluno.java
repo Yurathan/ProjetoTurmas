@@ -5,7 +5,7 @@
  */
 package Views;
 
-import Classes.AlunoInterator;
+import Classes.AlunoIterator;
 import Classes.Alunos;
 import Filtro.TamanhoMax;
 import Filtro.numerico;
@@ -165,7 +165,7 @@ public class CadAluno extends javax.swing.JFrame {
         if  (TFnome.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome está vazio.");
         } else {
-                AlunoInterator alunoiterator = new AlunoInterator();
+                AlunoIterator alunoiterator = new AlunoIterator();
             if  (aluno.getPkAluno().equals(-1)) {
                 try {
                     aluno.setNomeCompleto(TFnome.getText());
@@ -195,7 +195,7 @@ public class CadAluno extends javax.swing.JFrame {
     private void TFcodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TFcodigoFocusLost
         // TODO add your handling code here:
         if  (!TFcodigo.getText().trim().equals("")){
-            AlunoInterator alunoiterator = new AlunoInterator();
+            AlunoIterator alunoiterator = new AlunoIterator();
             aluno = alunoiterator.buscaAlunoPelaPk(Integer.parseInt(TFcodigo.getText()));
             TFnome.setText(aluno.getNomeCompleto());
         }

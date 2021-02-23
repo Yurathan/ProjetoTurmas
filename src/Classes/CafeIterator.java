@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Bene
  */
-public class CafeInterator {
+public class CafeIterator {
     
     public void alteraCafe(Cafe cafe){
         MySQLcon sqlcon = new MySQLcon();

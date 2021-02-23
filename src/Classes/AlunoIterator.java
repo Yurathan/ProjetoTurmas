@@ -13,7 +13,7 @@ import java.sql.ResultSet;
  *
  * @author Bene
  */
-public class AlunoInterator {
+public class AlunoIterator {
     public void adicionaAluno(Alunos aluno) throws Exception{
         MySQLcon sqlcon = new MySQLcon();
         try{
@@ -57,6 +57,27 @@ public class AlunoInterator {
         }finally{
             sqlcon.close();
         }    
+    }
+    
+    public Alunos buscaAlunoPeloNome(String nome){
+        MySQLcon sqlcon = new MySQLcon();
+        Alunos R = new Alunos();
+        try{
+            String sql = "SELECT pkAluno"+
+                         "  FROM alunos"+
+                         " WHERE Alunos.NomeCompleto LIKE %?%";
+            PreparedStatement prepstatement = sqlcon.preparaSQL(sql);
+            prepstatement.setString(1, nome);
+            ResultSet resultset = sqlcon.ler();
+            while (resultset.next()){
+                R = buscaAlunoPelaPk(resultset.getInt("pkAluno"));
+            }
+        } catch(Exception e){
+          return null;   
+        }finally{
+            sqlcon.close();
+        }
+        return R;
     }
     
     public Alunos buscaAlunoPelaPk(int pk){

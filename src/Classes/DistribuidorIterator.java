@@ -131,7 +131,7 @@ public class DistribuidorIterator {
     public void distribuiAlunosEntreCafe(){
         MySQLcon alunoscon = new MySQLcon();
         MySQLcon cafecon = new MySQLcon();
-        AlunoInterator alunointeratator = new AlunoInterator();
+        AlunoIterator alunointeratator = new AlunoIterator();
         try{
             String sqlAluno = "Select pkAluno From Alunos";
             String sqlCafe = "Select pkCafe,Lotacao From Cafe";
@@ -191,6 +191,7 @@ public class DistribuidorIterator {
                 etapa ++;
                 if  (etapa == 2) {
                     alunoR.beforeFirst();
+                    salaR.beforeFirst();
                 }
                 while(salaR.next()){
                     sala ++;

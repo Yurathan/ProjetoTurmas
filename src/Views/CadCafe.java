@@ -6,7 +6,7 @@
 package Views;
 
 import Classes.Cafe;
-import Classes.CafeInterator;
+import Classes.CafeIterator;
 import Filtro.TamanhoMax;
 import Filtro.numerico;
 import javax.swing.JButton;
@@ -164,7 +164,7 @@ public class CadCafe extends javax.swing.JFrame {
     private void TFcodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TFcodigoFocusLost
         // TODO add your handling code here:
         if  (!TFcodigo.getText().trim().equals("")){
-            CafeInterator cafeiterator = new CafeInterator();
+            CafeIterator cafeiterator = new CafeIterator();
             cafe = cafeiterator.buscacafePelaPk(Integer.parseInt(TFcodigo.getText()));
             TFdescricao.setText(cafe.getDescricao());
             TFlotacao.setText(String.valueOf(cafe.getLotacao()));
@@ -195,7 +195,7 @@ public class CadCafe extends javax.swing.JFrame {
             cafe.setPkcafe(-1);
         }
         
-        CafeInterator cafeiterator = new CafeInterator();
+        CafeIterator cafeiterator = new CafeIterator();
         if  (cafe.getPkcafe().equals(-1)) {
             try {
                 cafe.setDescricao(TFdescricao.getText());

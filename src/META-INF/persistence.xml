@@ -5,6 +5,8 @@
     <class>Classes.Alunos</class>
     <class>Classes.Cafe</class>
     <class>Classes.Salas</class>
+    <class>Classes.AlunosHasEtapa</class>
+    <class>Classes.Etapa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ControleDeEvento?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

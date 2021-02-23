@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -39,6 +41,9 @@ public class Alunos implements Serializable {
     @Basic(optional = false)
     @Column(name = "NomeCompleto")
     private String nomeCompleto;
+    @JoinColumn(name = "Cafe_pkcafe", referencedColumnName = "pkcafe")
+    @ManyToOne
+    private Cafe cafepkcafe;
 
     public Alunos() {
     }
@@ -66,6 +71,14 @@ public class Alunos implements Serializable {
 
     public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
+    }
+
+    public Cafe getCafepkcafe() {
+        return cafepkcafe;
+    }
+
+    public void setCafepkcafe(Cafe cafepkcafe) {
+        this.cafepkcafe = cafepkcafe;
     }
 
     @Override

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Bene
  */
-public class SalaInterator {
+public class SalaIterator {
     MySQLcon sqlcon = new MySQLcon();
     public void adicionaSala(Salas sala){
         MySQLcon sqlcon = new MySQLcon();

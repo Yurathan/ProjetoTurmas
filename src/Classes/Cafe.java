@@ -6,6 +6,7 @@
 package Classes;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,6 +46,8 @@ public class Cafe implements Serializable {
     @Basic(optional = false)
     @Column(name = "Lotacao")
     private int lotacao;
+    @OneToMany(mappedBy = "cafepkcafe")
+    private Collection<Alunos> alunosCollection;
 
     public Cafe() {
     }
@@ -79,6 +84,15 @@ public class Cafe implements Serializable {
 
     public void setLotacao(int lotacao) {
         this.lotacao = lotacao;
+    }
+
+    @XmlTransient
+    public Collection<Alunos> getAlunosCollection() {
+        return alunosCollection;
+    }
+
+    public void setAlunosCollection(Collection<Alunos> alunosCollection) {
+        this.alunosCollection = alunosCollection;
     }
 
     @Override

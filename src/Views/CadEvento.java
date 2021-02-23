@@ -5,7 +5,7 @@
  */
 package Views;
 
-import Classes.SalaInterator;
+import Classes.SalaIterator;
 import Classes.Salas;
 import Filtro.TamanhoMax;
 import Filtro.numerico;
@@ -182,7 +182,7 @@ public class CadEvento extends javax.swing.JFrame {
             sala.setPkSala(-1);
         }
 
-        SalaInterator salaiterator = new SalaInterator();
+        SalaIterator salaiterator = new SalaIterator();
         if  (sala.getPkSala().equals(-1)) {
             try {
                 sala.setDescrição(TFdescricao.getText());
@@ -219,7 +219,7 @@ public class CadEvento extends javax.swing.JFrame {
     private void TFcodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TFcodigoFocusLost
         // TODO add your handling code here:
         if  (!TFcodigo.getText().trim().equals("")){
-            SalaInterator salaiterator = new SalaInterator();
+            SalaIterator salaiterator = new SalaIterator();
             sala = salaiterator.buscaSalaPelaPk(Integer.parseInt(TFcodigo.getText()));
             TFdescricao.setText(sala.getDescrição());
             TFlotacao.setText(String.valueOf(sala.getLotação()));
