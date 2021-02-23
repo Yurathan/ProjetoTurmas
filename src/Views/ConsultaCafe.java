@@ -147,6 +147,8 @@ public class ConsultaCafe extends javax.swing.JFrame {
             }            
         }catch(Exception e){
             
+        }finally{
+            con.close();
         }
     }//GEN-LAST:event_formWindowOpened
 
