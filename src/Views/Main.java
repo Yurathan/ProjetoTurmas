@@ -36,6 +36,7 @@ public class Main extends javax.swing.JFrame {
         MIConsultaSala = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de evento");
@@ -102,6 +103,15 @@ public class Main extends javax.swing.JFrame {
                 jMenu3ActionPerformed(evt);
             }
         });
+
+        jMenuItem2.setText("Distribuidor de Alunos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -158,9 +168,13 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
-        DistribuirAlunos dAlunos = new DistribuirAlunos();
-        dAlunos.setVisible(true);
     }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        DistribuirAlunos dAlunos = new DistribuirAlunos();
+        dAlunos.setVisible(true);     
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,5 +222,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
