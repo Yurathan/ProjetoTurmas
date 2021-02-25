@@ -97,6 +97,11 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Distribuir");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -150,6 +155,12 @@ public class Main extends javax.swing.JFrame {
         ConsultaSala cSala = new ConsultaSala();
         cSala.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+        DistribuirAlunos dAlunos = new DistribuirAlunos();
+        dAlunos.setVisible(true);
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
