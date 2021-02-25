@@ -1,0 +1,29 @@
+Execute o arquivo "DB SQL.sql" contido na pasta documentos em um banco de dados MySQL para gerar o banco.
+O sistema por padrão procura o banco no LOCALHOST com o usuáro Root e sem senha, para alterar essa configuração o arquivo "MySQLcon.java" dentro do pacote DBConnect deve ser alterado na linha
+                connect = DriverManager.getConnection("jdbc:mysql://localhost/controledeevento?"
+                                                      + "user=root&password=");
+
+Após o sistema estar conectando.
+Para cadastrar o aluno basta clicar no menu Cadastros >> Alunos
+Após abrir a janela do cadastro de alunos , clique no botão novo e coloque o nome do aluno após isso apenas precisa apertar o botão gravar.
+Para alterar um aluno basta digitar o código dele no campo código e apertar tab (no campo) onde fará o programa procurar pelo aluno se achar carregando suas informações.
+Para consultar os alunos é apenas ir no menu consultas >> Alunos
+Na consulta o sistema ira procurar por um nome contendo o conteúdo do edit "Nome Contendo"
+
+Para Cadastrar as Salas basta clicar no menu Cadastros >> Salas de Evento
+Após abrir a janela apenas clique no novo e insira as informações desejada e depois em gravar.
+Para consulta é o mesmo mecânismo do aluno.
+O sistema pela regra do teste permite apenas 2 salas.
+
+Para Cadastrar áreas de café basta clicar no menu Cadastros >> Área de café
+para adicioanr basta clicar no novo e inserir as informações após isso é apenas apertar o botão grava.
+Para consultar é o mesmo mecânismo do aluno, bastando inserir o código da área de cafe.
+O sistema pela regra do teste permite apenas 2 áreas de café.
+
+Consulta sala permite consultar os alunos nela e a fase, pondendo filtrar pela fase do evento ou não.
+
+Para distribuir os alunos basta clicar no menu "Distribuir" >> "Distribuidor de Alunos"
+e clicar no botão iniciar, uma vez que todos os alunos estejam devidamente cadastrados o sistema irá distribuir. 
+
+
+

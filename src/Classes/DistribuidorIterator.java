@@ -157,6 +157,7 @@ public class DistribuidorIterator {
                     alunointeratator.setaCafeParaAluno(alunoR.getInt(1), cafeR.getInt("pkCafe"));
                 }
             }
+            JOptionPane.showMessageDialog(null, "Distribuição dos alunos nas áreas de café concluída");
         }catch(Exception e){
             
         }finally{
@@ -243,6 +244,7 @@ public class DistribuidorIterator {
                         }
                     }
                 }
+            JOptionPane.showMessageDialog(null, "Distribuição dos alunos nas salas concluída");
             }
         }catch(Exception e){
             

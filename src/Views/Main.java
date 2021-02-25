@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu1.add(MIalunos);
 
-        MISalas.setText("Sala de Eventos");
+        MISalas.setText("Sala de eventos");
         MISalas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MISalasActionPerformed(evt);
@@ -71,7 +71,7 @@ public class Main extends javax.swing.JFrame {
 
         jMenu2.setText("Consultas");
 
-        MIConsultaAluno.setText("Aluno");
+        MIConsultaAluno.setText("Alunos");
         MIConsultaAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MIConsultaAlunoActionPerformed(evt);
