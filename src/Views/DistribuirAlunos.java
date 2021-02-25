@@ -102,7 +102,8 @@ public class DistribuirAlunos extends javax.swing.JFrame {
         
         if  (!Diterator.IsValidoDistribuiçãoPorLotacao()) return;
                 
-        
+        Diterator.distribuiAlunosEntreSalas();
+        Diterator.distribuiAlunosEntreCafe();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

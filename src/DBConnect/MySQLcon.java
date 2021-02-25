@@ -30,6 +30,8 @@ public class MySQLcon {
             if  (connect == null)
                 connect = DriverManager.getConnection("jdbc:mysql://localhost/controledeevento?"
                                                       + "user=root&password=");
+            if  (connect.isClosed()) connect = DriverManager.getConnection("jdbc:mysql://localhost/controledeevento?"
+                                                      + "user=root&password=");
         } catch(Exception e) {
             throw e;
         }

@@ -133,7 +133,7 @@ public class DistribuidorIterator {
         MySQLcon cafecon = new MySQLcon();
         AlunoIterator alunointeratator = new AlunoIterator();
         try{
-            String sqlAluno = "Select pkAluno From Alunos";
+            String sqlAluno = "Select pkAluno From Alunos order by pkAluno";
             String sqlCafe = "Select pkCafe,Lotacao From Cafe";
             PreparedStatement alunosta = alunoscon.preparaSQL(sqlAluno);
             PreparedStatement cafesta = cafecon.preparaSQL(sqlCafe);
@@ -146,13 +146,15 @@ public class DistribuidorIterator {
                 cntaluno = 0;
                 while (alunoR.next()){                
                     cntaluno ++;
-                    alunointeratator.setaCafeParaAluno(alunoR.getInt(1), cafeR.getInt("pkCafe"));
                     if  (cntaluno > cafeR.getInt("Lotacao")){
+                        alunoR.previous();
                         break;
                     }
                     if  (cntaluno > QuantidadeAlunosSala1){
+                        alunoR.previous();
                         break;
                     }
+                    alunointeratator.setaCafeParaAluno(alunoR.getInt(1), cafeR.getInt("pkCafe"));
                 }
             }
         }catch(Exception e){
@@ -193,6 +195,7 @@ public class DistribuidorIterator {
                     alunoR.beforeFirst();
                     salaR.beforeFirst();
                 }
+                sala = 0;
                 while(salaR.next()){
                     sala ++;
                     if  (sala == 1){
@@ -205,27 +208,31 @@ public class DistribuidorIterator {
                     if  (etapa == 1){
                         while(alunoR.next()){
                             alunodistribuido ++;
-                            alunoeetapaiterator.LigaAlunaASalaEFase(alunoR.getInt(1), salaR.getInt(1), etapaR.getInt(1));
                             if  (sala == 1){
-                                if  (QuantidadeAlunosSala1 == alunodistribuido){
+                                if  (QuantidadeAlunosSala1 < alunodistribuido){
+                                    alunoR.previous();
                                     break;
                                 }
                             }else{
-                                if  (QuantidadeAlunosSala2 == alunodistribuido){
+                                if  (QuantidadeAlunosSala2 <     alunodistribuido){
                                     break;
                                 }
                             }
-                        }    
+                            alunoeetapaiterator.LigaAlunaASalaEFase(alunoR.getInt(1), etapaR.getInt(1), salaR.getInt(1));
+                        }   
                     }else{
                         while(alunoR.next()){
                             cntaluno++;
                             if  (sala == 1) {
+                                if  (cntaluno > QuantidadeAlunosSala1) {
+                                    alunoR.previous();
+                                    break;
+                                }                                
                                 if  (cntaluno <= (Math.round(QuantidadeAlunosSala1/2))){
                                     alunoeetapaiterator.LigaAlunaASalaEFase(alunoR.getInt(1), etapaR.getInt(1), pksala1);
                                 }else{
                                     alunoeetapaiterator.LigaAlunaASalaEFase(alunoR.getInt(1), etapaR.getInt(1), pksala2);                            
                                 }
-                                if  (cntaluno == QuantidadeAlunosSala1) break;
                             }else{
                                 if  (cntaluno <= (int)(QuantidadeAlunosSala2/2)){
                                     alunoeetapaiterator.LigaAlunaASalaEFase(alunoR.getInt(1), etapaR.getInt(1), pksala1);
